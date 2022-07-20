@@ -19,7 +19,7 @@ class TabBarController: UITabBarController {
         
         self.setViewControllers([homeVC, cartVC, savedVC, profileVC], animated: false)
         self.tabBar.tintColor = UIColor(named: "Primary")
-        self.tabBar.barTintColor = UIColor(named: "Disabled")
+        self.tabBar.barTintColor = UIColor(named: "Backgroud")
 
         guard let items = self.tabBar.items else { return }
         let icons = ["house.fill", "cart.fill", "bookmark.fill", "person.fill"]

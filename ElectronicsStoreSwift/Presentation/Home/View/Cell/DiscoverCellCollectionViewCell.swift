@@ -32,7 +32,6 @@ class DiscoverCellCollectionViewCell: UICollectionViewCell {
     
     fileprivate let imageViewItem: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "macbookProM1")
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -58,8 +57,7 @@ class DiscoverCellCollectionViewCell: UICollectionViewCell {
     
     fileprivate let labelItemName: UILabel = {
         let label = UILabel()
-        label.text = "Macbook Pro M1"
-        label.numberOfLines = 0
+        label.numberOfLines = 1
         label.font = .systemFont(ofSize: 12, weight: .bold)
         label.textColor = UIColor(named: "Text")
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -68,7 +66,6 @@ class DiscoverCellCollectionViewCell: UICollectionViewCell {
     
     fileprivate let labelItemValue: UILabel = {
         let label = UILabel()
-        label.text = "$160"
         label.font = .systemFont(ofSize: 14, weight: .bold)
         label.textColor = UIColor(named: "Text")
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -92,6 +89,12 @@ class DiscoverCellCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Methods
+    func settingCell(_ cellData: Product) {
+        self.labelItemName.text = cellData.name
+        self.labelItemValue.text = "$\(cellData.price)"
+        self.imageViewItem.image = UIImage(named: cellData.imageName)
+    }
+    
     fileprivate func buildHierarchy() {
         self.addSubview(stackBase)
         stackBase.addArrangedSubview(viewImageContainer)

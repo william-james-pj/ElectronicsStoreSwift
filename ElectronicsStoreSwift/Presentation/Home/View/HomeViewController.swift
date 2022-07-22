@@ -6,10 +6,17 @@
 //
 
 import UIKit
+import RxSwift
 
 class HomeViewController: UIViewController {
     // MARK: - Constrants
+    fileprivate let disposeBag = DisposeBag()
     // MARK: - Variables
+    fileprivate var viewModel: HomeViewModel = {
+        return HomeViewModel()
+    }()
+    fileprivate var baseData: [Section] = []
+    
     // MARK: - Components
     fileprivate let stackBase: UIStackView = {
         let stack = UIStackView()
@@ -39,6 +46,12 @@ class HomeViewController: UIViewController {
     
     // MARK: - Setup
     fileprivate func setupVC() {
+        
+        self.viewModel.productData.subscribe(onNext: { data in
+            self.baseData = data
+            self.collectionViewHome.reloadData()
+        }).disposed(by: disposeBag)
+        
         view.backgroundColor = UIColor(named: "Backgroud")
         buildHierarchy()
         buildConstraints()
@@ -89,7 +102,11 @@ extension HomeViewController: UICollectionViewDataSource {
             return 1
             
         case 4: //Discover Items
-            return 6
+            if baseData.isEmpty {
+                return 0
+            }
+            
+            return baseData[2].products.count
         default:
             return 0
         }
@@ -102,11 +119,13 @@ extension HomeViewController: UICollectionViewDataSource {
             return cell
             
         case 1: //Hot sales
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HotSalesCollectionViewCell.resuseIdentifier, for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HotSalesCollectionViewCell.resuseIdentifier, for: indexPath) as! HotSalesCollectionViewCell
+            cell.settingCell(self.baseData[0].products)
             return cell
             
         case 2: //Recently Viewed
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecentlyViewedCollectionViewCell.resuseIdentifier, for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecentlyViewedCollectionViewCell.resuseIdentifier, for: indexPath) as! RecentlyViewedCollectionViewCell
+            cell.settingCell(self.baseData[1].products)
             return cell
             
         case 3: //Discover Header
@@ -114,7 +133,8 @@ extension HomeViewController: UICollectionViewDataSource {
             return cell
             
         case 4: //Discover Items
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DiscoverCellCollectionViewCell.resuseIdentifier, for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DiscoverCellCollectionViewCell.resuseIdentifier, for: indexPath) as! DiscoverCellCollectionViewCell
+            cell.settingCell(self.baseData[2].products[indexPath.row])
             return cell
             
         default:
@@ -135,7 +155,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
             return CGSize(width: width, height: 166)
             
         case 1: //Hot sales
-            return CGSize(width: width, height: 250)
+            return CGSize(width: width, height: 260)
             
         case 2: //Recently Viewed
             return CGSize(width: width, height: 260)

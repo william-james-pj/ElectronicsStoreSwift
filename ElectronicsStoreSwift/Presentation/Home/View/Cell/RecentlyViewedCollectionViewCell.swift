@@ -6,10 +6,16 @@
 //
 
 import UIKit
+import RxSwift
+import RxRelay
 
 class RecentlyViewedCollectionViewCell: UICollectionViewCell {
     // MARK: - Constants
     static let resuseIdentifier: String = "RecentlyViewedCollectionViewCell"
+    let disposeBag = DisposeBag()
+    
+    // MARK: - Variables
+    fileprivate var cellData = BehaviorRelay<[Product]>(value: [])
     
     // MARK: - Components
     fileprivate let stackBase: UIStackView = {
@@ -72,6 +78,10 @@ class RecentlyViewedCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Setup
     fileprivate func setupVC() {
+        self.cellData.subscribe(onNext: { data in
+            self.collectionViewHotSales.reloadData()
+        }).disposed(by: disposeBag)
+        
         buildHierarchy()
         buildConstraints()
         
@@ -86,6 +96,10 @@ class RecentlyViewedCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Methods
+    func settingCell(_ items: [Product]) {
+        self.cellData.accept(items)
+    }
+    
     fileprivate func buildHierarchy() {
         self.addSubview(stackBase)
         stackBase.addArrangedSubview(stackText)
@@ -112,11 +126,12 @@ extension RecentlyViewedCollectionViewCell: UICollectionViewDelegate {
 // MARK: - extension CollectionViewDataSource
 extension RecentlyViewedCollectionViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return self.cellData.value.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecentlyViewedCellCollectionViewCell.resuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecentlyViewedCellCollectionViewCell.resuseIdentifier, for: indexPath) as! RecentlyViewedCellCollectionViewCell
+        cell.settingCell(self.cellData.value[indexPath.row])
         return cell
     }
 }

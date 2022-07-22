@@ -32,7 +32,6 @@ class HotSalesCellCollectionViewCell: UICollectionViewCell {
     
     fileprivate let imageViewItem: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "macbookProM1")
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -52,13 +51,14 @@ class HotSalesCellCollectionViewCell: UICollectionViewCell {
         stack.axis = .horizontal
         stack.spacing = 0
         stack.distribution = .equalSpacing
+        stack.alignment = .top
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
     fileprivate let labelItemName: UILabel = {
         let label = UILabel()
-        label.text = "Macbook Pro M1"
+        label.numberOfLines = 2
         label.font = .systemFont(ofSize: 12, weight: .bold)
         label.textColor = UIColor(named: "Text")
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -67,16 +67,14 @@ class HotSalesCellCollectionViewCell: UICollectionViewCell {
     
     fileprivate let labelItemValue: UILabel = {
         let label = UILabel()
-        label.text = "$160"
         label.font = .systemFont(ofSize: 12, weight: .bold)
         label.textColor = UIColor(named: "Text")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    fileprivate let labelDescription: UILabel = {
+    fileprivate let labelItemDescription: UILabel = {
         let label = UILabel()
-        label.text = "The intuitive and intelligent Wi-1000XM4 headshones"
         label.numberOfLines = 2
         label.font = .systemFont(ofSize: 10, weight: .regular)
         label.textColor = UIColor(named: "Disabled")
@@ -101,6 +99,13 @@ class HotSalesCellCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Methods
+    func settingCell(_ item: Product) {
+        self.labelItemName.text = item.name
+        self.labelItemValue.text = "$\(item.price)"
+        self.labelItemDescription.text = item.description
+        self.imageViewItem.image = UIImage(named: item.imageName)
+    }
+    
     fileprivate func buildHierarchy() {
         self.addSubview(stackBase)
         stackBase.addArrangedSubview(viewImageContainer)
@@ -111,7 +116,7 @@ class HotSalesCellCollectionViewCell: UICollectionViewCell {
         stackContent.addArrangedSubview(stackText)
         stackText.addArrangedSubview(labelItemName)
         stackText.addArrangedSubview(labelItemValue)
-        stackContent.addArrangedSubview(labelDescription)
+        stackContent.addArrangedSubview(labelItemDescription)
     }
     
     fileprivate func buildConstraints() {
@@ -127,6 +132,8 @@ class HotSalesCellCollectionViewCell: UICollectionViewCell {
             imageViewItem.leadingAnchor.constraint(equalTo: viewImageContainer.leadingAnchor, constant: 16),
             imageViewItem.trailingAnchor.constraint(equalTo: viewImageContainer.trailingAnchor, constant: -16),
             imageViewItem.bottomAnchor.constraint(equalTo: viewImageContainer.bottomAnchor, constant: -16),
+            
+            labelItemName.widthAnchor.constraint(equalToConstant: 120),
         ])
     }
 }

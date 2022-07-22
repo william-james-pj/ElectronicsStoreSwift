@@ -32,7 +32,6 @@ class RecentlyViewedCellCollectionViewCell: UICollectionViewCell {
     
     fileprivate let imageViewItem: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "macbookProM1")
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -56,27 +55,24 @@ class RecentlyViewedCellCollectionViewCell: UICollectionViewCell {
         return stack
     }()
     
-    fileprivate let labelName: UILabel = {
+    fileprivate let labelItemName: UILabel = {
         let label = UILabel()
-        label.text = "Macbook Pro M1"
         label.font = .systemFont(ofSize: 14, weight: .bold)
         label.textColor = UIColor(named: "Text")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    fileprivate let labelValue: UILabel = {
+    fileprivate let labelItemValue: UILabel = {
         let label = UILabel()
-        label.text = "$160"
         label.font = .systemFont(ofSize: 16, weight: .bold)
         label.textColor = UIColor(named: "Text")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    fileprivate let labelDescription: UILabel = {
+    fileprivate let labelItemDescription: UILabel = {
         let label = UILabel()
-        label.text = "The intuitive and intelligent Wi-1000XM4 headshones"
         label.numberOfLines = 2
         label.font = .systemFont(ofSize: 8, weight: .regular)
         label.textColor = UIColor(named: "Disabled")
@@ -136,6 +132,14 @@ class RecentlyViewedCellCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Methods
+    // MARK: - Methods
+    func settingCell(_ item: Product) {
+        self.labelItemName.text = item.name
+        self.labelItemValue.text = "$\(item.price)"
+        self.labelItemDescription.text = item.description
+        self.imageViewItem.image = UIImage(named: item.imageName)
+    }
+    
     fileprivate func buildHierarchy() {
         self.addSubview(stackBase)
         stackBase.addArrangedSubview(viewImageContainer)
@@ -143,9 +147,9 @@ class RecentlyViewedCellCollectionViewCell: UICollectionViewCell {
         stackBase.addArrangedSubview(stackContent)
         
         stackContent.addArrangedSubview(stackText)
-        stackText.addArrangedSubview(labelName)
-        stackText.addArrangedSubview(labelDescription)
-        stackText.addArrangedSubview(labelValue)
+        stackText.addArrangedSubview(labelItemName)
+        stackText.addArrangedSubview(labelItemDescription)
+        stackText.addArrangedSubview(labelItemValue)
         
         stackContent.addArrangedSubview(stackButtons)
         stackButtons.addArrangedSubview(buttonSaved)

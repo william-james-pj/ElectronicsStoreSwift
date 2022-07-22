@@ -45,16 +45,6 @@ class CartViewController: UIViewController {
         setupVC()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
-    
     // MARK: - Setup
     fileprivate func setupVC() {
         view.backgroundColor = UIColor(named: "Backgroud")

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E0022E94288ACF3D00B70734 /* SavedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0022E93288ACF3D00B70734 /* SavedCollectionViewCell.swift */; };
 		E0DD4FC22889C08400BC09E5 /* CouponBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DD4FC12889C08400BC09E5 /* CouponBox.swift */; };
 		E0DD4FC62889C3CF00BC09E5 /* TextField+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DD4FC52889C3CF00BC09E5 /* TextField+extension.swift */; };
 		E0DD4FC82889C71D00BC09E5 /* UIView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DD4FC72889C71D00BC09E5 /* UIView+extension.swift */; };
@@ -56,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E0022E93288ACF3D00B70734 /* SavedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCollectionViewCell.swift; sourceTree = "<group>"; };
 		E0DD4FC12889C08400BC09E5 /* CouponBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponBox.swift; sourceTree = "<group>"; };
 		E0DD4FC52889C3CF00BC09E5 /* TextField+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+extension.swift"; sourceTree = "<group>"; };
 		E0DD4FC72889C71D00BC09E5 /* UIView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extension.swift"; sourceTree = "<group>"; };
@@ -116,6 +118,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E0022E92288ACF1700B70734 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				E0022E93288ACF3D00B70734 /* SavedCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		E0DD4FC32889C38E00BC09E5 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -263,6 +273,7 @@
 		E0FCAC642886FC8C003703CF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E0022E92288ACF1700B70734 /* Cell */,
 				E0FCAC6A2886FD06003703CF /* SavedViewController.swift */,
 			);
 			path = View;
@@ -432,6 +443,7 @@
 			files = (
 				E0FCAC6B2886FD06003703CF /* SavedViewController.swift in Sources */,
 				E0FCAC702886FE04003703CF /* NavigationController.swift in Sources */,
+				E0022E94288ACF3D00B70734 /* SavedCollectionViewCell.swift in Sources */,
 				E0DD4FC82889C71D00BC09E5 /* UIView+extension.swift in Sources */,
 				E0FCAC322886F812003703CF /* ViewController.swift in Sources */,
 				E0FCAC722886FEE4003703CF /* TabBarController.swift in Sources */,

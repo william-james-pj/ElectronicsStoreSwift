@@ -94,7 +94,7 @@ class HeaderCollectionViewCell: UICollectionViewCell {
     
     fileprivate func buildConstraints() {
         NSLayoutConstraint.activate([
-            viewBase.topAnchor.constraint(equalTo: self.topAnchor),
+            viewBase.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
             viewBase.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             viewBase.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             viewBase.bottomAnchor.constraint(equalTo: self.bottomAnchor),

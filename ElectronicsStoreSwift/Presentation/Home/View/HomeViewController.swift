@@ -132,7 +132,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
         
         switch indexPath.section {
         case 0: //Header
-            return CGSize(width: width, height: 150)
+            return CGSize(width: width, height: 166)
             
         case 1: //Hot sales
             return CGSize(width: width, height: 250)

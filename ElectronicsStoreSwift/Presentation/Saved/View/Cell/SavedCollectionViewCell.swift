@@ -30,6 +30,14 @@ class SavedCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
+    fileprivate let imageViewItem: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "macbookProM1")
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     fileprivate let viewStackTextContainer: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -125,6 +133,7 @@ class SavedCollectionViewCell: UICollectionViewCell {
     fileprivate func buildHierarchy() {
         self.addSubview(stackBase)
         stackBase.addArrangedSubview(viewImageContainer)
+        viewImageContainer.addSubview(imageViewItem)
         stackBase.addArrangedSubview(viewStackTextContainer)
         
         viewStackTextContainer.addSubview(stackText)
@@ -142,6 +151,11 @@ class SavedCollectionViewCell: UICollectionViewCell {
             stackBase.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
             viewImageContainer.widthAnchor.constraint(equalToConstant: 150),
+            
+            imageViewItem.topAnchor.constraint(equalTo: viewImageContainer.topAnchor, constant: 16),
+            imageViewItem.leadingAnchor.constraint(equalTo: viewImageContainer.leadingAnchor, constant: 16),
+            imageViewItem.trailingAnchor.constraint(equalTo: viewImageContainer.trailingAnchor, constant: -16),
+            imageViewItem.bottomAnchor.constraint(equalTo: viewImageContainer.bottomAnchor, constant: -16),
             
             stackText.topAnchor.constraint(equalTo: viewStackTextContainer.topAnchor, constant: 16),
             stackText.leadingAnchor.constraint(equalTo: viewStackTextContainer.leadingAnchor),

@@ -15,7 +15,7 @@ class HotSalesCellCollectionViewCell: UICollectionViewCell {
     fileprivate let stackBase: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
-        stack.spacing = 8
+        stack.spacing = 16
         stack.distribution = .fill
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
@@ -28,6 +28,23 @@ class HotSalesCellCollectionViewCell: UICollectionViewCell {
         view.backgroundColor = UIColor(red: 0.88, green: 0.94, blue: 0.98, alpha: 1.00)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
+    }()
+    
+    fileprivate let imageViewItem: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "macbookProM1")
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    fileprivate let stackContent: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 8
+        stack.distribution = .fill
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
     }()
     
     fileprivate let stackText: UIStackView = {
@@ -87,10 +104,14 @@ class HotSalesCellCollectionViewCell: UICollectionViewCell {
     fileprivate func buildHierarchy() {
         self.addSubview(stackBase)
         stackBase.addArrangedSubview(viewImageContainer)
-        stackBase.addArrangedSubview(stackText)
+        viewImageContainer.addSubview(imageViewItem)
+        
+        stackBase.addArrangedSubview(stackContent)
+        
+        stackContent.addArrangedSubview(stackText)
         stackText.addArrangedSubview(labelItemName)
         stackText.addArrangedSubview(labelItemValue)
-        stackBase.addArrangedSubview(labelDescription)
+        stackContent.addArrangedSubview(labelDescription)
     }
     
     fileprivate func buildConstraints() {
@@ -99,6 +120,13 @@ class HotSalesCellCollectionViewCell: UICollectionViewCell {
             stackBase.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             stackBase.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             stackBase.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            
+            viewImageContainer.heightAnchor.constraint(equalToConstant: 150),
+            
+            imageViewItem.topAnchor.constraint(equalTo: viewImageContainer.topAnchor, constant: 16),
+            imageViewItem.leadingAnchor.constraint(equalTo: viewImageContainer.leadingAnchor, constant: 16),
+            imageViewItem.trailingAnchor.constraint(equalTo: viewImageContainer.trailingAnchor, constant: -16),
+            imageViewItem.bottomAnchor.constraint(equalTo: viewImageContainer.bottomAnchor, constant: -16),
         ])
     }
 }

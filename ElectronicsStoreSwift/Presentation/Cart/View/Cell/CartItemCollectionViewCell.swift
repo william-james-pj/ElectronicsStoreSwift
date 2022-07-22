@@ -30,6 +30,14 @@ class CartItemCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
+    fileprivate let imageViewItem: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "macbookProM1")
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     fileprivate let viewContentContainer: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -167,6 +175,7 @@ class CartItemCollectionViewCell: UICollectionViewCell {
     fileprivate func buildHierarchy() {
         self.addSubview(stackBase)
         stackBase.addArrangedSubview(viewImageContainer)
+        viewImageContainer.addSubview(imageViewItem)
         stackBase.addArrangedSubview(viewContentContainer)
         
         viewContentContainer.addSubview(stackContent)
@@ -194,6 +203,11 @@ class CartItemCollectionViewCell: UICollectionViewCell {
             stackBase.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16),
             
             viewImageContainer.widthAnchor.constraint(equalToConstant: 80),
+            
+            imageViewItem.topAnchor.constraint(equalTo: viewImageContainer.topAnchor, constant: 16),
+            imageViewItem.leadingAnchor.constraint(equalTo: viewImageContainer.leadingAnchor, constant: 16),
+            imageViewItem.trailingAnchor.constraint(equalTo: viewImageContainer.trailingAnchor, constant: -16),
+            imageViewItem.bottomAnchor.constraint(equalTo: viewImageContainer.bottomAnchor, constant: -16),
             
             stackContent.topAnchor.constraint(equalTo: viewContentContainer.topAnchor, constant: 8),
             stackContent.leadingAnchor.constraint(equalTo: viewContentContainer.leadingAnchor),

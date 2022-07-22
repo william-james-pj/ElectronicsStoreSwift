@@ -30,6 +30,14 @@ class DiscoverCellCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
+    fileprivate let imageViewItem: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "macbookProM1")
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     fileprivate let viewCicle: UIView = {
         let view = UIView()
         view.clipsToBounds = true
@@ -87,6 +95,8 @@ class DiscoverCellCollectionViewCell: UICollectionViewCell {
     fileprivate func buildHierarchy() {
         self.addSubview(stackBase)
         stackBase.addArrangedSubview(viewImageContainer)
+        viewImageContainer.addSubview(imageViewItem)
+        
         stackBase.addArrangedSubview(stackText)
         stackText.addArrangedSubview(labelItemName)
         stackText.addArrangedSubview(labelItemValue)
@@ -101,6 +111,11 @@ class DiscoverCellCollectionViewCell: UICollectionViewCell {
             stackBase.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
             viewImageContainer.heightAnchor.constraint(equalToConstant: 150),
+            
+            imageViewItem.topAnchor.constraint(equalTo: viewImageContainer.topAnchor, constant: 16),
+            imageViewItem.leadingAnchor.constraint(equalTo: viewImageContainer.leadingAnchor, constant: 16),
+            imageViewItem.trailingAnchor.constraint(equalTo: viewImageContainer.trailingAnchor, constant: -16),
+            imageViewItem.bottomAnchor.constraint(equalTo: viewImageContainer.bottomAnchor, constant: -16),
             
 //            viewCicle.widthAnchor.constraint(equalToConstant: 30),
 //            viewCicle.heightAnchor.constraint(equalToConstant: 30),

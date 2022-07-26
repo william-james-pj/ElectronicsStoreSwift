@@ -14,6 +14,13 @@
 		E0022EA0288B068600B70734 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0022E9F288B068600B70734 /* HomeViewModel.swift */; };
 		E0022EA6288B0B1100B70734 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = E0022EA5288B0B1100B70734 /* RxRelay */; };
 		E0022EA8288B0B1100B70734 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E0022EA7288B0B1100B70734 /* RxSwift */; };
+		E0854798288EBFBC00E5D62C /* DetailsProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0854797288EBFBC00E5D62C /* DetailsProductViewController.swift */; };
+		E085479A288ED5F100E5D62C /* ButtonsQtd.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0854799288ED5F100E5D62C /* ButtonsQtd.swift */; };
+		E085479C288ED89100E5D62C /* SeparationLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E085479B288ED89100E5D62C /* SeparationLine.swift */; };
+		E08547A0288EE38000E5D62C /* ChooseColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E085479F288EE38000E5D62C /* ChooseColor.swift */; };
+		E08547A2288EE44500E5D62C /* ViewColorSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08547A1288EE44500E5D62C /* ViewColorSelect.swift */; };
+		E08547A5288F010300E5D62C /* CarouselDetailsProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08547A4288F010300E5D62C /* CarouselDetailsProduct.swift */; };
+		E08547A7288F04EF00E5D62C /* CarouselDetailsProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08547A6288F04EF00E5D62C /* CarouselDetailsProductCollectionViewCell.swift */; };
 		E0DD4FC22889C08400BC09E5 /* CouponBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DD4FC12889C08400BC09E5 /* CouponBox.swift */; };
 		E0DD4FC62889C3CF00BC09E5 /* TextField+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DD4FC52889C3CF00BC09E5 /* TextField+extension.swift */; };
 		E0DD4FC82889C71D00BC09E5 /* UIView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DD4FC72889C71D00BC09E5 /* UIView+extension.swift */; };
@@ -68,6 +75,13 @@
 		E0022E99288B051100B70734 /* products.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = products.json; sourceTree = "<group>"; };
 		E0022E9C288B057100B70734 /* GetProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProducts.swift; sourceTree = "<group>"; };
 		E0022E9F288B068600B70734 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		E0854797288EBFBC00E5D62C /* DetailsProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsProductViewController.swift; sourceTree = "<group>"; };
+		E0854799288ED5F100E5D62C /* ButtonsQtd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsQtd.swift; sourceTree = "<group>"; };
+		E085479B288ED89100E5D62C /* SeparationLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparationLine.swift; sourceTree = "<group>"; };
+		E085479F288EE38000E5D62C /* ChooseColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseColor.swift; sourceTree = "<group>"; };
+		E08547A1288EE44500E5D62C /* ViewColorSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewColorSelect.swift; sourceTree = "<group>"; };
+		E08547A4288F010300E5D62C /* CarouselDetailsProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselDetailsProduct.swift; sourceTree = "<group>"; };
+		E08547A6288F04EF00E5D62C /* CarouselDetailsProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselDetailsProductCollectionViewCell.swift; sourceTree = "<group>"; };
 		E0DD4FC12889C08400BC09E5 /* CouponBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponBox.swift; sourceTree = "<group>"; };
 		E0DD4FC52889C3CF00BC09E5 /* TextField+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+extension.swift"; sourceTree = "<group>"; };
 		E0DD4FC72889C71D00BC09E5 /* UIView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extension.swift"; sourceTree = "<group>"; };
@@ -171,6 +185,32 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		E0854795288EBF6300E5D62C /* DetailsProduct */ = {
+			isa = PBXGroup;
+			children = (
+				E0854796288EBF9700E5D62C /* View */,
+			);
+			path = DetailsProduct;
+			sourceTree = "<group>";
+		};
+		E0854796288EBF9700E5D62C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E08547A3288EFFED00E5D62C /* Cell */,
+				E0854797288EBFBC00E5D62C /* DetailsProductViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E08547A3288EFFED00E5D62C /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				E08547A4288F010300E5D62C /* CarouselDetailsProduct.swift */,
+				E08547A6288F04EF00E5D62C /* CarouselDetailsProductCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		E0DD4FC32889C38E00BC09E5 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -196,6 +236,10 @@
 				E0F743122889846900AC679E /* ScreenHeader.swift */,
 				E0F74318288998B500AC679E /* CartSpentDescription.swift */,
 				E0DD4FC12889C08400BC09E5 /* CouponBox.swift */,
+				E0854799288ED5F100E5D62C /* ButtonsQtd.swift */,
+				E085479B288ED89100E5D62C /* SeparationLine.swift */,
+				E085479F288EE38000E5D62C /* ChooseColor.swift */,
+				E08547A1288EE44500E5D62C /* ViewColorSelect.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -258,6 +302,7 @@
 		E0FCAC5D2886FA8A003703CF /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				E0854795288EBF6300E5D62C /* DetailsProduct */,
 				E0FCAC6E2886FDEE003703CF /* Navigation */,
 				E0FCAC5E2886FAC6003703CF /* Home */,
 				E0FCAC602886FB36003703CF /* Cart */,
@@ -505,14 +550,20 @@
 				E0FCAC722886FEE4003703CF /* TabBarController.swift in Sources */,
 				E0F743132889846900AC679E /* ScreenHeader.swift in Sources */,
 				E0FCAC2E2886F812003703CF /* AppDelegate.swift in Sources */,
+				E08547A0288EE38000E5D62C /* ChooseColor.swift in Sources */,
+				E08547A7288F04EF00E5D62C /* CarouselDetailsProductCollectionViewCell.swift in Sources */,
 				E0F96ABE28886059005FD491 /* DiscoverCellCollectionViewCell.swift in Sources */,
+				E08547A2288EE44500E5D62C /* ViewColorSelect.swift in Sources */,
 				E0F7431728898BF800AC679E /* CartFooterCollectionReusableView.swift in Sources */,
 				E0022EA0288B068600B70734 /* HomeViewModel.swift in Sources */,
 				E0DD4FC22889C08400BC09E5 /* CouponBox.swift in Sources */,
 				E0FCAC7C28871CE5003703CF /* HotSalesCellCollectionViewCell.swift in Sources */,
 				E0F74319288998B500AC679E /* CartSpentDescription.swift in Sources */,
+				E085479A288ED5F100E5D62C /* ButtonsQtd.swift in Sources */,
 				E0022E97288B044700B70734 /* DataHome.swift in Sources */,
+				E0854798288EBFBC00E5D62C /* DetailsProductViewController.swift in Sources */,
 				E0FCAC692886FCF7003703CF /* CartViewController.swift in Sources */,
+				E08547A5288F010300E5D62C /* CarouselDetailsProduct.swift in Sources */,
 				E0FCAC6D2886FD14003703CF /* ProfileViewController.swift in Sources */,
 				E0FCAC7A28871A81003703CF /* HotSalesCollectionViewCell.swift in Sources */,
 				E0F96ABC28885FA9005FD491 /* DiscoverCollectionViewCell.swift in Sources */,
@@ -520,6 +571,7 @@
 				E0FCAC78288716C7003703CF /* HeaderCollectionViewCell.swift in Sources */,
 				E0FCAC8028872B5A003703CF /* RecentlyViewedCellCollectionViewCell.swift in Sources */,
 				E0FCAC302886F812003703CF /* SceneDelegate.swift in Sources */,
+				E085479C288ED89100E5D62C /* SeparationLine.swift in Sources */,
 				E0022E9D288B057100B70734 /* GetProducts.swift in Sources */,
 				E0FCAC672886FCE4003703CF /* HomeViewController.swift in Sources */,
 				E0F7431028897A1E00AC679E /* CartItemCollectionViewCell.swift in Sources */,

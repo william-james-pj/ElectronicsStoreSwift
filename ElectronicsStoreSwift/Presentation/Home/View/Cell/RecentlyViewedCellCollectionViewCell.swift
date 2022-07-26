@@ -137,7 +137,7 @@ class RecentlyViewedCellCollectionViewCell: UICollectionViewCell {
         self.labelItemName.text = item.name
         self.labelItemValue.text = "$\(item.price)"
         self.labelItemDescription.text = item.description
-        self.imageViewItem.image = UIImage(named: item.imageName)
+        self.imageViewItem.image = UIImage(named: item.imagesName[0])
     }
     
     fileprivate func buildHierarchy() {

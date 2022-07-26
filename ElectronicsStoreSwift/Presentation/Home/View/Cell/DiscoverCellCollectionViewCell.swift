@@ -92,7 +92,7 @@ class DiscoverCellCollectionViewCell: UICollectionViewCell {
     func settingCell(_ cellData: Product) {
         self.labelItemName.text = cellData.name
         self.labelItemValue.text = "$\(cellData.price)"
-        self.imageViewItem.image = UIImage(named: cellData.imageName)
+        self.imageViewItem.image = UIImage(named: cellData.imagesName[0])
     }
     
     fileprivate func buildHierarchy() {

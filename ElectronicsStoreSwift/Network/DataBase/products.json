@@ -8,32 +8,36 @@
                     "name": "Apple - iPhone 13 Pro Max",
                     "price": 1099,
                     "description": "iPhone 13 Pro Max. The biggest Pro camera system upgrade ever. Super Retina XDR display with ProMotion for a faster, more responsive feel. Lightning-fast A15 Bionic chip. Superfast 5G.¹ Durable design and the best battery life ever in an iPhone.²",
-                    "imageName": "iphone",
-                    "isSaved": false
+                    "imagesName": ["iphone"],
+                    "isSaved": false,
+                    "colors": ["#000000"]
                 },
                 {
                     "id": "d785149b-9124-47ee-9b75-474c0e57f180",
                     "name": "Sony - PlayStation 5",
                     "price": 499,
                     "description": "The PS5 console unleashes new gaming possibilities that you never anticipated. Experience lightning fast loading with an ultra-high speed SSD, deeper immersion with support for haptic feedback, adaptive triggers, and 3D Audio*, and an all-new generation of incredible PlayStation games. *3D audio via built-in TV speakers or analog/USB stereo headphones. Set up and latest system software update required.",
-                    "imageName": "ps5",
-                    "isSaved": false
+                    "imagesName": ["ps5"],
+                    "isSaved": false,
+                    "colors": ["#000000"]
                 },
                 {
                     "id": "c52edfaa-fde5-456e-95dd-fcfa95329dc4",
                     "name": "Apple - AirPods  Max",
                     "price": 499,
                     "description": "AirPods Max reimagine over-ear headphones. An Apple-designed dynamic driver provides immersive high-fidelity audio. Every detail, from canopy to cushions, has been designed for an exceptional fit. Active Noise Cancellation blocks outside noise, while Transparency mode lets it in. And spatial audio with dynamic head tracking provides theater-like sound that surrounds you.",
-                    "imageName": "AirPods",
-                    "isSaved": false
+                    "imagesName": ["AirPods"],
+                    "isSaved": false,
+                    "colors": ["#000000"]
                 },
                 {
                     "id": "961a425c-3ad7-487c-869b-9492369fb38d",
                     "name": "Microsoft - Xbox Series X",
                     "price": 499,
                     "description": "Xbox Series X, the fastest, most powerful Xbox ever. Explore rich new worlds with 12 teraflops of raw graphic processing power, DirectX ray tracing, a custom SSD, and 4K gaming. Make the most of every gaming minute with Quick Resume, lightning-fast load times, and gameplay of up to 120 FPS—all powered by Xbox Velocity Architecture. Enjoy thousands of games from four generations of Xbox, with hundreds of optimized titles that look and play better than ever. And when you add Xbox Game Pass Ultimate (membership sold separately or included when you choose Xbox All Access), you get an instant library of 100+ high-quality games, including day one releases from Xbox Game Studios like Halo Infinite, Forza Horizon 5, and Microsoft Flight Simulator.",
-                    "imageName": "xbox",
-                    "isSaved": false
+                    "imagesName": ["xbox"],
+                    "isSaved": false,
+                    "colors": ["#000000"]
                 }
             ]
         },
@@ -50,48 +54,54 @@
                     "name": "Macbook Pro M1",
                     "price": 800,
                     "description": "O MacBookPro de 13 polegadas está voando com o chip M1 da Apple. Sua CPU de oito núcleos encara com rapidez fluxos de trabalho complexos em fotografia, programação, edição de vídeo e muito mais.",
-                    "imageName": "macbookProM1",
-                    "isSaved": false
+                    "imagesName": ["macbookProM1","macbookProM1"],
+                    "isSaved": false,
+                    "colors": ["#000000"]
                 },
                 {
                     "id": "ff19822e-5dab-45d9-af8f-67d7f0046b5e",
                     "name": "AirPods Pro",
                     "price": 179,
                     "description": "AirPods Pro feature Active Noise Cancellation for immersive sound. Transparency mode for hearing the world around you. They’re sweat and water resistant1 and have a customizable fit for all-day comfort.",
-                    "imageName": "AirPodsPro",
-                    "isSaved": false
+                    "imagesName": ["AirPodsPro"],
+                    "isSaved": false,
+                    "colors": ["#000000"]
                 },
                 {
                     "id": "9d0c7170-6248-48ab-a994-9b4701531dd2",
                     "name": "Samsung - 55 Class 7 Series",
                     "price": 499,
                     "description": "Improve your viewing experience with this 55-inch Samsung smart TV. The variety of applications offer easy access to content on popular streaming services, and the intuitive interface makes finding your favorite shows simple. Boasting native 4K resolution and advanced HDR technology, this Samsung smart TV enriches your movie nights with stunningly detailed visuals and lifelike colors.",
-                    "imageName": "Samsung55",
-                    "isSaved": false
+                    "imagesName": ["Samsung55"],
+                    "isSaved": false,
+                    "colors": ["#000000"]
                 },
                 {
                     "id": "bd67a7f9-e316-41ff-a5f5-70c0cb85c146",
                     "name": "GoPro - HERO10 Black",
                     "price": 399,
                     "description": "Capture quality vlogs with this black GoPro HERO10 camera. The removable rechargeable 1720 mAh battery offers long shooting periods, while the rugged, waterproof design allows flexible use on different terrains. This GoPro HERO10 camera features a 1.4-inch screen for framing shots seamlessly, and the 23MP sensor captures 5.3K videos effortlessly.",
-                    "imageName": "GoPro",
-                    "isSaved": false
+                    "imagesName": ["GoPro"],
+                    "isSaved": false,
+                    "colors": ["#000000"]
                 },
                 {
                     "id": "dbe06b0a-95c3-42e2-a1aa-c6d008be5c55",
                     "name": "Apple - iPad 10.2-Inch",
                     "price": 329,
                     "description": "Powerful. Easy to use. Versatile. The new iPad has a beautiful 10.2-inch Retina display, powerful A13 Bionic chip, an Ultra Wide front camera with Center Stage, and works with Apple Pencil and the Smart Keyboard.¹ iPad lets you do more, more easily. All for an incredible value.",
-                    "imageName": "ipad",
-                    "isSaved": false
+                    "imagesName": ["ipad"],
+                    "isSaved": false,
+                    "colors": ["#000000"]
                 },
                 {
                     "id": "aa394b5f-c71c-4345-93a6-b81dff31227d",
                     "name": "Samsung - Galaxy S22 Ultra",
                     "price": 1149,
                     "description": "The power of our fastest chip ever, long lasting battery, and sophisticated AI enables revolutionary night-time video that’s as clear-as-day. And, for the first time, S Pen with its increased super-powers has been embedded in Galaxy S22 Ultra’s beautifully sleek design. Today, Galaxy S22 Ultra sets an epic standard of smartphone experience.",
-                    "imageName": "Galaxy",
-                    "isSaved": false
+                    "imagesName": ["Galaxy"],
+                    "isSaved": false,
+                    "colors": ["#000000"]
                 }
             ]
         }

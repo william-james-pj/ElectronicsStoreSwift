@@ -9,6 +9,10 @@ import UIKit
 import RxSwift
 import RxRelay
 
+protocol HotHotSalesCollectionViewCellDelegate {
+    func navigationToVC(_ vc: UIViewController)
+}
+
 class HotSalesCollectionViewCell: UICollectionViewCell {
     // MARK: - Constants
     static let resuseIdentifier: String = "HotSalesCollectionViewCell"
@@ -16,6 +20,7 @@ class HotSalesCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Variables
     fileprivate var cellData = BehaviorRelay<[Product]>(value: [])
+    var delegate: HotHotSalesCollectionViewCellDelegate?
     
     // MARK: - Components
     fileprivate let stackBase: UIStackView = {
@@ -121,6 +126,11 @@ class HotSalesCollectionViewCell: UICollectionViewCell {
 
 // MARK: - extension UICollectionViewDelegate
 extension HotSalesCollectionViewCell: UICollectionViewDelegate {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailsVC = DetailsProductViewController()
+        detailsVC.settingScreen(cellData.value[indexPath.row])
+        delegate?.navigationToVC(detailsVC)
+    }
 }
 
 // MARK: - extension CollectionViewDataSource

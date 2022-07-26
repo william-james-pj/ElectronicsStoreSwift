@@ -24,6 +24,7 @@ struct Product: Codable {
     let name: String
     let price: Int
     let description: String
-    let imageName: String
+    let imagesName: [String]
     let isSaved: Bool
+    let colors: [String]
 }

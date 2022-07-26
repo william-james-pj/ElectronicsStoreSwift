@@ -46,13 +46,13 @@ class HomeViewController: UIViewController {
     
     // MARK: - Setup
     fileprivate func setupVC() {
+        view.backgroundColor = UIColor(named: "Backgroud")
         
         self.viewModel.productData.subscribe(onNext: { data in
             self.baseData = data
             self.collectionViewHome.reloadData()
         }).disposed(by: disposeBag)
         
-        view.backgroundColor = UIColor(named: "Backgroud")
         buildHierarchy()
         buildConstraints()
         setupCollection()
@@ -88,6 +88,15 @@ class HomeViewController: UIViewController {
 
 // MARK: - extension UICollectionViewDelegate
 extension HomeViewController: UICollectionViewDelegate {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if (indexPath.section != 4) {
+            return
+        }
+        
+        let detailsVC = DetailsProductViewController()
+        detailsVC.settingScreen(baseData[2].products[indexPath.row])
+        self.navigationController?.pushViewController(detailsVC, animated: true)
+    }
 }
 
 // MARK: - extension CollectionViewDataSource
@@ -121,6 +130,7 @@ extension HomeViewController: UICollectionViewDataSource {
         case 1: //Hot sales
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HotSalesCollectionViewCell.resuseIdentifier, for: indexPath) as! HotSalesCollectionViewCell
             cell.settingCell(self.baseData[0].products)
+            cell.delegate = self
             return cell
             
         case 2: //Recently Viewed
@@ -177,3 +187,10 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - extension HotHotSalesCollectionViewCellDelegate
+extension HomeViewController: HotHotSalesCollectionViewCellDelegate{
+    func navigationToVC(_ vc: UIViewController) {
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+
+}

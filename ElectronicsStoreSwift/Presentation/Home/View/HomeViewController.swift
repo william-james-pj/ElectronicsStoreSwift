@@ -95,6 +95,11 @@ extension HomeViewController: UICollectionViewDelegate {
         
         let detailsVC = DetailsProductViewController()
         detailsVC.settingScreen(baseData[2].products[indexPath.row])
+        
+        detailsVC.viewModel.setViewedBehavior.subscribe(onNext: { _ in
+            self.viewModel.updateProductViewed()
+        }).disposed(by: disposeBag)
+        
         self.navigationController?.pushViewController(detailsVC, animated: true)
     }
 }
@@ -107,7 +112,14 @@ extension HomeViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
-        case 0, 1, 2, 3: //Header & Hot sales & Recently Viewed & Discover Header
+        case 0, 1, 3: //Header & Hot sales & Discover Header
+            return 1
+            
+        case 2: // Recently Viewed
+            if baseData[1].products.count == 0 {
+                return 0
+            }
+            
             return 1
             
         case 4: //Discover Items
@@ -189,8 +201,15 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - extension HotHotSalesCollectionViewCellDelegate
 extension HomeViewController: HotHotSalesCollectionViewCellDelegate{
-    func navigationToVC(_ vc: UIViewController) {
-        self.navigationController?.pushViewController(vc, animated: true)
+    func navigationToDetails(_ product: Product) {
+        let detailsVC = DetailsProductViewController()
+        detailsVC.settingScreen(product)
+        
+        detailsVC.viewModel.setViewedBehavior.subscribe(onNext: { _ in
+            self.viewModel.updateProductViewed()
+        }).disposed(by: disposeBag)
+        
+        self.navigationController?.pushViewController(detailsVC, animated: true)
     }
 
 }

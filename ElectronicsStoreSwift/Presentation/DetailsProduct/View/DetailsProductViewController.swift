@@ -10,6 +10,10 @@ import UIKit
 class DetailsProductViewController: UIViewController {
     // MARK: - Constrants
     // MARK: - Variables
+    var viewModel: DetailsProductViewModel = {
+        return DetailsProductViewModel()
+    }()
+    
     // MARK: - Components
     fileprivate let stackBase: UIStackView = {
         let stack = UIStackView()
@@ -171,11 +175,12 @@ class DetailsProductViewController: UIViewController {
         self.labelItemName.text = item.name
         self.labelItemValue.text = "$ \(item.price)"
         self.labelItemDescription.text = item.description
-//        self.imageViewItem.image = UIImage(named: item.imageName)
         
         let colors = item.colors.map { self.hexStringToUIColor(hex: $0)}
         self.viewChooseColor.setButtonColors(colors)
         self.carouselDetailsProduct.settingCell(item.imagesName)
+        
+        self.viewModel.setProductViewed(item)
     }
     
     fileprivate func buildHierarchy() {

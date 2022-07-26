@@ -15,7 +15,7 @@ struct DataHome: Codable {
 // MARK: - Section
 struct Section: Codable {
     let sectionTitle: String
-    let products: [Product]
+    var products: [Product]
 }
 
 // MARK: - Product

@@ -18,10 +18,37 @@ class HomeViewModel {
         getData()
     }
     
-    fileprivate func getData() {
+    // MARK: - Methods
+    func updateProductViewed() {
+        var data = productData.value
         
-        let data = GetPublication().getPublication()
+        let productViewed = getProductViewedFromUserDefaults()
+        
+        data[1].products = productViewed
+        
+        productData.accept(data)
+    }
+    
+    fileprivate func getData() {
+        var data = GetPublication().getPublication()
+        
+        let productViewed = getProductViewedFromUserDefaults()
+        
+        if productViewed.count != 0 {
+            data[1].products += productViewed
+        }
 
         productData.accept(data)
+    }
+    
+    fileprivate func getProductViewedFromUserDefaults() -> [Product]{
+        let userDefaults = UserDefaults.standard
+        do {
+            let arrayUserDefault = try userDefaults.getObject(forKey: "productViewed", castTo: [Product].self)
+
+            return arrayUserDefault
+        } catch {
+            return []
+        }
     }
 }

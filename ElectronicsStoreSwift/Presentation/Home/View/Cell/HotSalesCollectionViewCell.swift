@@ -10,7 +10,7 @@ import RxSwift
 import RxRelay
 
 protocol HotHotSalesCollectionViewCellDelegate {
-    func navigationToVC(_ vc: UIViewController)
+    func navigationToDetails(_ product: Product)
 }
 
 class HotSalesCollectionViewCell: UICollectionViewCell {
@@ -127,9 +127,7 @@ class HotSalesCollectionViewCell: UICollectionViewCell {
 // MARK: - extension UICollectionViewDelegate
 extension HotSalesCollectionViewCell: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailsVC = DetailsProductViewController()
-        detailsVC.settingScreen(cellData.value[indexPath.row])
-        delegate?.navigationToVC(detailsVC)
+        delegate?.navigationToDetails(cellData.value[indexPath.row])
     }
 }
 

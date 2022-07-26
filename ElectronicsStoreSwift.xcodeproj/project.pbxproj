@@ -14,6 +14,8 @@
 		E0022EA0288B068600B70734 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0022E9F288B068600B70734 /* HomeViewModel.swift */; };
 		E0022EA6288B0B1100B70734 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = E0022EA5288B0B1100B70734 /* RxRelay */; };
 		E0022EA8288B0B1100B70734 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E0022EA7288B0B1100B70734 /* RxSwift */; };
+		E006BAAA28902A6B008E2681 /* DetailsProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E006BAA928902A6B008E2681 /* DetailsProductViewModel.swift */; };
+		E006BAAC28902B4C008E2681 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E006BAAB28902B4C008E2681 /* UserDefaults+Extensions.swift */; };
 		E0854798288EBFBC00E5D62C /* DetailsProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0854797288EBFBC00E5D62C /* DetailsProductViewController.swift */; };
 		E085479A288ED5F100E5D62C /* ButtonsQtd.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0854799288ED5F100E5D62C /* ButtonsQtd.swift */; };
 		E085479C288ED89100E5D62C /* SeparationLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E085479B288ED89100E5D62C /* SeparationLine.swift */; };
@@ -75,6 +77,8 @@
 		E0022E99288B051100B70734 /* products.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = products.json; sourceTree = "<group>"; };
 		E0022E9C288B057100B70734 /* GetProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProducts.swift; sourceTree = "<group>"; };
 		E0022E9F288B068600B70734 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		E006BAA928902A6B008E2681 /* DetailsProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsProductViewModel.swift; sourceTree = "<group>"; };
+		E006BAAB28902B4C008E2681 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		E0854797288EBFBC00E5D62C /* DetailsProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsProductViewController.swift; sourceTree = "<group>"; };
 		E0854799288ED5F100E5D62C /* ButtonsQtd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsQtd.swift; sourceTree = "<group>"; };
 		E085479B288ED89100E5D62C /* SeparationLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparationLine.swift; sourceTree = "<group>"; };
@@ -185,9 +189,18 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		E006BAA828902A44008E2681 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E006BAA928902A6B008E2681 /* DetailsProductViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		E0854795288EBF6300E5D62C /* DetailsProduct */ = {
 			isa = PBXGroup;
 			children = (
+				E006BAA828902A44008E2681 /* ViewModel */,
 				E0854796288EBF9700E5D62C /* View */,
 			);
 			path = DetailsProduct;
@@ -216,6 +229,7 @@
 			children = (
 				E0DD4FC52889C3CF00BC09E5 /* TextField+extension.swift */,
 				E0DD4FC72889C71D00BC09E5 /* UIView+extension.swift */,
+				E006BAAB28902B4C008E2681 /* UserDefaults+Extensions.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -547,10 +561,12 @@
 				E0022E94288ACF3D00B70734 /* SavedCollectionViewCell.swift in Sources */,
 				E0DD4FC82889C71D00BC09E5 /* UIView+extension.swift in Sources */,
 				E0FCAC322886F812003703CF /* ViewController.swift in Sources */,
+				E006BAAA28902A6B008E2681 /* DetailsProductViewModel.swift in Sources */,
 				E0FCAC722886FEE4003703CF /* TabBarController.swift in Sources */,
 				E0F743132889846900AC679E /* ScreenHeader.swift in Sources */,
 				E0FCAC2E2886F812003703CF /* AppDelegate.swift in Sources */,
 				E08547A0288EE38000E5D62C /* ChooseColor.swift in Sources */,
+				E006BAAC28902B4C008E2681 /* UserDefaults+Extensions.swift in Sources */,
 				E08547A7288F04EF00E5D62C /* CarouselDetailsProductCollectionViewCell.swift in Sources */,
 				E0F96ABE28886059005FD491 /* DiscoverCellCollectionViewCell.swift in Sources */,
 				E08547A2288EE44500E5D62C /* ViewColorSelect.swift in Sources */,

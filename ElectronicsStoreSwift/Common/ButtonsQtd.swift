@@ -8,6 +8,8 @@
 import UIKit
 
 class ButtonsQtd: UIView {
+    // MARK: - Variables
+    var qtdSelected: Int = 1
 
     // MARK: - Components
     fileprivate let stackBase: UIStackView = {
@@ -21,6 +23,7 @@ class ButtonsQtd: UIView {
     
     fileprivate let buttonMinus: UIButton = {
         let button = UIButton()
+        button.tag = 0
         button.clipsToBounds = true
         button.layer.cornerRadius = 8
         button.layer.borderWidth = 1
@@ -28,6 +31,7 @@ class ButtonsQtd: UIView {
         button.backgroundColor = .clear
         button.setImage(UIImage(systemName: "minus"), for: .normal)
         button.tintColor = UIColor(named: "Primary")
+        button.addTarget(self, action: #selector(buttonsTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -44,14 +48,31 @@ class ButtonsQtd: UIView {
     
     fileprivate let buttonPlus: UIButton = {
         let button = UIButton()
+        button.tag = 1
         button.clipsToBounds = true
         button.layer.cornerRadius = 8
         button.backgroundColor = UIColor(named: "Primary")
         button.setImage(UIImage(systemName: "plus"), for: .normal)
         button.tintColor = .white
+        button.addTarget(self, action: #selector(buttonsTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    // MARK: - Actions
+    @IBAction func buttonsTapped(sender: UIButton) {
+        if sender.tag == 0 {
+            if qtdSelected - 1 < 1 {
+                return
+            }
+            qtdSelected -= 1
+        }
+        else {
+            qtdSelected += 1
+        }
+        
+        self.labelQtd.text = "\(self.qtdSelected)"
+    }
     
     // MARK: - Lifecycle
     override init(frame: CGRect) {
@@ -72,6 +93,11 @@ class ButtonsQtd: UIView {
     }
     
     // MARK: - Methods
+    func setQtd(_ qtd: Int) {
+        self.qtdSelected = qtd
+        self.labelQtd.text = "\(qtd)"
+    }
+    
     fileprivate func buildHierarchy() {
         self.addSubview(stackBase)
         stackBase.addArrangedSubview(buttonMinus)

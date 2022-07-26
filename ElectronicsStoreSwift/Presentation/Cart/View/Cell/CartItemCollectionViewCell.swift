@@ -32,7 +32,6 @@ class CartItemCollectionViewCell: UICollectionViewCell {
     
     fileprivate let imageViewItem: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "macbookProM1")
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -46,8 +45,8 @@ class CartItemCollectionViewCell: UICollectionViewCell {
     
     fileprivate let stackContent: UIStackView = {
         let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.spacing = 8
+        stack.axis = .vertical
+        stack.spacing = 10
         stack.distribution = .fill
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
@@ -56,7 +55,7 @@ class CartItemCollectionViewCell: UICollectionViewCell {
     fileprivate let stackText: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
-        stack.spacing = 0
+        stack.spacing = 8
         stack.distribution = .equalSpacing
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
@@ -64,7 +63,6 @@ class CartItemCollectionViewCell: UICollectionViewCell {
     
     fileprivate let labelItemName: UILabel = {
         let label = UILabel()
-        label.text = "Macbook Pro M1"
         label.font = .systemFont(ofSize: 12, weight: .bold)
         label.textColor = UIColor(named: "Text")
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -73,7 +71,6 @@ class CartItemCollectionViewCell: UICollectionViewCell {
     
     fileprivate let labelItemDescription: UILabel = {
         let label = UILabel()
-        label.text = "The intuitive and intelligent Wi-1000XM4 headshones"
         label.numberOfLines = 2
         label.font = .systemFont(ofSize: 8, weight: .regular)
         label.textColor = UIColor(named: "Disabled")
@@ -83,69 +80,24 @@ class CartItemCollectionViewCell: UICollectionViewCell {
     
     fileprivate let labelItemValue: UILabel = {
         let label = UILabel()
-        label.text = "$160"
         label.font = .systemFont(ofSize: 14, weight: .bold)
         label.textColor = UIColor(named: "Text")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    fileprivate let stackButtonContainer: UIStackView = {
+    fileprivate let stackFooter: UIStackView = {
         let stack = UIStackView()
-        stack.axis = .vertical
+        stack.axis = .horizontal
         stack.spacing = 0
         stack.distribution = .fill
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
-    fileprivate let viewStackButtonAux: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
+    fileprivate let buttonsQtd: ButtonsQtd = {
+        let view = ButtonsQtd()
         return view
-    }()
-    
-    fileprivate let stackButtons: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.spacing = 4
-        stack.distribution = .fill
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-    
-    fileprivate let buttonMinus: UIButton = {
-        let button = UIButton()
-        button.clipsToBounds = true
-        button.layer.cornerRadius = 4
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor(named: "Primary")?.cgColor
-        button.backgroundColor = .clear
-        button.setImage(UIImage(systemName: "minus"), for: .normal)
-        button.tintColor = UIColor(named: "Primary")
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    fileprivate let labelQtd: UILabel = {
-        let label = UILabel()
-        label.text = "1"
-        label.textAlignment = .center
-        label.font = .systemFont(ofSize: 12, weight: .bold)
-        label.textColor = UIColor(named: "Text")
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    fileprivate let buttonPlus: UIButton = {
-        let button = UIButton()
-        button.clipsToBounds = true
-        button.layer.cornerRadius = 4
-        button.backgroundColor = UIColor(named: "Primary")
-        button.setImage(UIImage(systemName: "plus"), for: .normal)
-        button.tintColor = .white
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
     }()
     
     fileprivate let viewBorderBottom: UIView = {
@@ -172,6 +124,15 @@ class CartItemCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Methods
+    func settingCell(_ item: CartModel) {
+        self.labelItemName.text = item.product.name
+        self.labelItemValue.text = "$\(item.product.price)"
+        self.labelItemDescription.text = item.product.description
+        self.imageViewItem.image = UIImage(named: item.product.imagesName[0])
+        
+        self.buttonsQtd.setQtd(item.qtd)
+    }
+    
     fileprivate func buildHierarchy() {
         self.addSubview(stackBase)
         stackBase.addArrangedSubview(viewImageContainer)
@@ -179,17 +140,14 @@ class CartItemCollectionViewCell: UICollectionViewCell {
         stackBase.addArrangedSubview(viewContentContainer)
         
         viewContentContainer.addSubview(stackContent)
+        
         stackContent.addArrangedSubview(stackText)
         stackText.addArrangedSubview(labelItemName)
         stackText.addArrangedSubview(labelItemDescription)
-        stackText.addArrangedSubview(labelItemValue)
         
-        stackContent.addArrangedSubview(stackButtonContainer)
-        stackButtonContainer.addArrangedSubview(viewStackButtonAux)
-        stackButtonContainer.addArrangedSubview(stackButtons)
-        stackButtons.addArrangedSubview(buttonMinus)
-        stackButtons.addArrangedSubview(labelQtd)
-        stackButtons.addArrangedSubview(buttonPlus)
+        stackContent.addArrangedSubview(stackFooter)
+        stackFooter.addArrangedSubview(labelItemValue)
+        stackFooter.addArrangedSubview(buttonsQtd)
         
         self.addSubview(viewBorderBottom)
         
@@ -213,14 +171,6 @@ class CartItemCollectionViewCell: UICollectionViewCell {
             stackContent.leadingAnchor.constraint(equalTo: viewContentContainer.leadingAnchor),
             stackContent.trailingAnchor.constraint(equalTo: viewContentContainer.trailingAnchor),
             stackContent.bottomAnchor.constraint(equalTo: viewContentContainer.bottomAnchor, constant: -8),
-            
-            stackButtonContainer.widthAnchor.constraint(equalToConstant: 70),
-            
-            buttonMinus.widthAnchor.constraint(equalToConstant: 20),
-            buttonMinus.heightAnchor.constraint(equalToConstant: 20),
-            
-            buttonPlus.widthAnchor.constraint(equalToConstant: 20),
-            buttonPlus.heightAnchor.constraint(equalToConstant: 20),
             
             viewBorderBottom.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             viewBorderBottom.trailingAnchor.constraint(equalTo: self.trailingAnchor),

@@ -13,6 +13,7 @@ class DetailsProductViewController: UIViewController {
     var viewModel: DetailsProductViewModel = {
         return DetailsProductViewModel()
     }()
+    var productSelected: Product?
     
     // MARK: - Components
     fileprivate let stackBase: UIStackView = {
@@ -149,9 +150,22 @@ class DetailsProductViewController: UIViewController {
         button.tintColor = .white
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         button.setTitle("Add Cart", for: .normal)
+        button.addTarget(self, action: #selector(buttonAddCartTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    // MARK: - Actions
+    @IBAction func buttonAddCartTapped(sender: UIButton) {
+        guard let productSelected = productSelected else {
+            return
+        }
+        
+        let qtd = self.buttonsQtd.qtdSelected
+        
+        viewModel.addProductInCart(productSelected, qtd: qtd)
+        self.navigationController?.popViewController(animated: true)
+    }
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -181,6 +195,7 @@ class DetailsProductViewController: UIViewController {
         self.carouselDetailsProduct.settingCell(item.imagesName)
         
         self.viewModel.setProductViewed(item)
+        self.productSelected = item
     }
     
     fileprivate func buildHierarchy() {

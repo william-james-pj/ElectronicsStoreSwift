@@ -6,11 +6,18 @@
 //
 
 import UIKit
+import RxSwift
 
 class CartViewController: UIViewController {
     // MARK: - Constrants
+    fileprivate let disposeBag = DisposeBag()
     private let reuseIdentifierHeader = "UIViewCartHeader"
     // MARK: - Variables
+    fileprivate var viewModel: CartViewModel = {
+        return CartViewModel()
+    }()
+    fileprivate var cartData: [CartModel] = []
+    
     // MARK: - Components
     fileprivate let stackBase: UIStackView = {
         let stack = UIStackView()
@@ -25,6 +32,12 @@ class CartViewController: UIViewController {
         let screenHeader = ScreenHeader()
         screenHeader.title = "My Cart"
         return screenHeader
+    }()
+    
+    fileprivate let emptyView: EmptyView = {
+        let view = EmptyView()
+        view.isHidden = true
+        return view
     }()
         
     fileprivate let collectionViewCart: UICollectionView = {
@@ -45,9 +58,22 @@ class CartViewController: UIViewController {
         setupVC()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.viewModel.getData()
+    }
+    
     // MARK: - Setup
     fileprivate func setupVC() {
         view.backgroundColor = UIColor(named: "Backgroud")
+        
+        self.viewModel.cartData.subscribe(onNext: { data in
+            self.cartData = data
+            self.collectionViewCart.reloadData()
+            self.setView()
+        }).disposed(by: disposeBag)
+        
+        setView()        
         buildHierarchy()
         buildConstraints()
         setupCollection()
@@ -63,10 +89,21 @@ class CartViewController: UIViewController {
     }
 
     // MARK: - Methods
+    fileprivate func setView() {
+        if self.cartData.count == 0 {
+            self.collectionViewCart.isHidden = true
+            self.emptyView.isHidden = false
+            return
+        }
+        self.collectionViewCart.isHidden = false
+        self.emptyView.isHidden = true
+    }
+    
     fileprivate func buildHierarchy() {
         view.addSubview(stackBase)
         stackBase.addArrangedSubview(topBar)
         stackBase.addArrangedSubview(collectionViewCart)
+        stackBase.addArrangedSubview(emptyView)
     }
     
     fileprivate func buildConstraints() {
@@ -87,11 +124,12 @@ extension CartViewController: UICollectionViewDelegate {
 // MARK: - extension CollectionViewDataSource
 extension CartViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return self.cartData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CartItemCollectionViewCell.resuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CartItemCollectionViewCell.resuseIdentifier, for: indexPath) as! CartItemCollectionViewCell
+        cell.settingCell(self.cartData[indexPath.row])
         return cell
     }
     
@@ -128,6 +166,11 @@ extension CartViewController: UICollectionViewDelegateFlowLayout {
     // Footer
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         let width = collectionView.frame.width
+        
+        if self.cartData.count == 0 {
+            return CGSize(width: width, height: 0)
+        }
+        
         return CGSize(width: width, height: 350)
     }
 }

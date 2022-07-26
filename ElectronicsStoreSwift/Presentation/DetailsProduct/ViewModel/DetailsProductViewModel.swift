@@ -11,6 +11,7 @@ import RxRelay
 
 class DetailsProductViewModel {
     // MARK: - Constants
+    let userDefaults = UserDefaultsManagemen()
     let setViewedBehavior = BehaviorRelay<Int>(value: 0)
     
     // MARK: - Init
@@ -19,7 +20,7 @@ class DetailsProductViewModel {
     
     // MARK: - Variables
     func setProductViewed(_ product: Product) {
-        var arrayAux = getProductViewedFromUserDefaults()
+        var arrayAux = userDefaults.getProductViewed()
         
         let isViewed = arrayAux.first { item in
             item.id == product.id
@@ -30,26 +31,14 @@ class DetailsProductViewModel {
         }
         
         arrayAux.insert(product, at: 0)
-        setProductViewedInUserDefault(arrayAux)
+        userDefaults.setProductViewed(arrayAux)
         self.setViewedBehavior.accept(1)
     }
     
-    fileprivate func getProductViewedFromUserDefaults() -> [Product]{
-        let userDefaults = UserDefaults.standard
-        do {
-            let arrayUserDefault = try userDefaults.getObject(forKey: "productViewed", castTo: [Product].self)
-
-            return arrayUserDefault
-        } catch {
-            return []
-        }
-    }
-    
-    fileprivate func setProductViewedInUserDefault(_ products: [Product]) {
-        let userDefaults = UserDefaults.standard
-        do {
-            try userDefaults.setObject(products, forKey: "productViewed")
-        } catch {
-        }
+    func addProductInCart(_ product: Product, qtd: Int) {
+        let newCart = CartModel(qtd: qtd, product: product)
+        var carts = userDefaults.getCart()
+        carts.append(newCart)
+        userDefaults.setCart(carts)
     }
 }

@@ -28,3 +28,8 @@ struct Product: Codable {
     let isSaved: Bool
     let colors: [String]
 }
+
+struct CartModel: Codable {
+    var qtd: Int
+    let product: Product
+}

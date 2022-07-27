@@ -7,9 +7,17 @@
 
 import UIKit
 
+protocol CartItemCollectionViewCellDelegate {
+    func updateQtd(_ cartItem: CartModel)
+}
+
 class CartItemCollectionViewCell: UICollectionViewCell {
     // MARK: - Constants
     static let resuseIdentifier: String = "CartItemCollectionViewCell"
+    
+    // MARK: - Variable
+    var cartData : CartModel?
+    var delegate : CartItemCollectionViewCellDelegate?
     
     // MARK: - Components
     fileprivate let stackBase: UIStackView = {
@@ -119,6 +127,8 @@ class CartItemCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Setup
     fileprivate func setupVC() {
+        self.buttonsQtd.delegate = self
+        
         buildHierarchy()
         buildConstraints()
     }
@@ -131,6 +141,7 @@ class CartItemCollectionViewCell: UICollectionViewCell {
         self.imageViewItem.image = UIImage(named: item.product.imagesName[0])
         
         self.buttonsQtd.setQtd(item.qtd)
+        self.cartData = item
     }
     
     fileprivate func buildHierarchy() {
@@ -177,5 +188,16 @@ class CartItemCollectionViewCell: UICollectionViewCell {
             viewBorderBottom.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             viewBorderBottom.heightAnchor.constraint(equalToConstant: 1),
         ])
+    }
+}
+
+// MARK: - extension ButtonsQtdDelegate
+extension CartItemCollectionViewCell: ButtonsQtdDelegate {
+    func updateQtd(_ qtd: Int) {
+        guard var cartData = self.cartData else { return }
+        
+        cartData.qtd = qtd
+        
+        self.delegate?.updateQtd(cartData)
     }
 }

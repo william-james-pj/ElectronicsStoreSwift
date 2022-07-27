@@ -130,6 +130,7 @@ extension CartViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CartItemCollectionViewCell.resuseIdentifier, for: indexPath) as! CartItemCollectionViewCell
         cell.settingCell(self.cartData[indexPath.row])
+        cell.delegate = self
         return cell
     }
     
@@ -141,7 +142,8 @@ extension CartViewController: UICollectionViewDataSource {
                 return header
             
         case UICollectionView.elementKindSectionFooter:
-            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: CartFooterCollectionReusableView.resuseIdentifier, for: indexPath)
+            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: CartFooterCollectionReusableView.resuseIdentifier, for: indexPath) as! CartFooterCollectionReusableView
+            footer.settingCell(subtotal: self.viewModel.getTotalValue())
             return footer
         default:
             assert(false, "Unexpected element kind")
@@ -175,3 +177,10 @@ extension CartViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - extension CartItemCollectionViewCellDelegate
+extension CartViewController: CartItemCollectionViewCellDelegate {
+    func updateQtd(_ cartItem: CartModel) {
+        self.viewModel.updateQtdCartItem(cartItem)
+    }
+    
+}

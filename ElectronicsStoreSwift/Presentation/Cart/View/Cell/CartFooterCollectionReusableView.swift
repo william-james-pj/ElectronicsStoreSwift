@@ -11,6 +11,20 @@ class CartFooterCollectionReusableView: UICollectionReusableView {
     // MARK: - Constants
     static let resuseIdentifier: String = "CartFooterCollectionReusableView"
     
+    // MARK: - Variables
+    fileprivate var subtotalValue: Float = 0 {
+        didSet {
+            self.calculateTotal()
+        }
+    }
+    fileprivate var discountValue: Float = 0 {
+        didSet {
+            self.calculateTotal()
+        }
+    }
+    fileprivate var deliveryValue: Float = 10.00
+    fileprivate var totalValue: Float = 0
+    
     // MARK: - Components
     fileprivate let stackBase: UIStackView = {
         let stack = UIStackView()
@@ -44,21 +58,18 @@ class CartFooterCollectionReusableView: UICollectionReusableView {
     fileprivate let subtotal: CartSpentDescription = {
         let spent = CartSpentDescription()
         spent.text = "Subtotal:"
-        spent.value = "$160"
         return spent
     }()
     
     fileprivate let delivery: CartSpentDescription = {
         let spent = CartSpentDescription()
         spent.text = "Delivery Fee:"
-        spent.value = "$10"
         return spent
     }()
     
     fileprivate let discount: CartSpentDescription = {
         let spent = CartSpentDescription()
         spent.text = "Discount:"
-        spent.value = "15%"
         return spent
     }()
     
@@ -81,7 +92,6 @@ class CartFooterCollectionReusableView: UICollectionReusableView {
     fileprivate let total: CartSpentDescription = {
         let spent = CartSpentDescription()
         spent.text = "Total:"
-        spent.value = "$170"
         spent.isFeaturedValue = true
         return spent
     }()
@@ -114,11 +124,30 @@ class CartFooterCollectionReusableView: UICollectionReusableView {
     
     // MARK: - Setup
     fileprivate func setupVC() {
+        self.couponBox.delegate = self
+        
+        setValues()
         buildHierarchy()
         buildConstraints()
     }
     
     // MARK: - Methods
+    func settingCell(subtotal: Float) {
+        self.subtotalValue = subtotal
+    }
+    
+    fileprivate func calculateTotal() {
+        self.totalValue = self.subtotalValue + deliveryValue - self.discountValue
+        self.setValues()
+    }
+    
+    fileprivate func setValues() {
+        self.subtotal.value = "$\(subtotalValue)"
+        self.delivery.value = "$\(deliveryValue)"
+        self.discount.value = "$\(discountValue)"
+        self.total.value = "$\(totalValue)"
+    }
+    
     fileprivate func buildHierarchy() {
         self.addSubview(stackBase)
         stackBase.addArrangedSubview(couponBox)
@@ -148,4 +177,11 @@ class CartFooterCollectionReusableView: UICollectionReusableView {
             viewLine.heightAnchor.constraint(equalToConstant: 2),
         ])
     }
+}
+
+extension CartFooterCollectionReusableView: CouponBoxDelegate {
+    func setCouponValue(_ value: Float) {
+        self.discountValue = value
+    }
+    
 }

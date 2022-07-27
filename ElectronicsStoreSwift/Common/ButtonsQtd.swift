@@ -7,9 +7,15 @@
 
 import UIKit
 
+protocol ButtonsQtdDelegate {
+    func updateQtd(_ qtd: Int)
+}
+
 class ButtonsQtd: UIView {
     // MARK: - Variables
     var qtdSelected: Int = 1
+    
+    var delegate: ButtonsQtdDelegate?
 
     // MARK: - Components
     fileprivate let stackBase: UIStackView = {
@@ -72,6 +78,7 @@ class ButtonsQtd: UIView {
         }
         
         self.labelQtd.text = "\(self.qtdSelected)"
+        self.delegate?.updateQtd(self.qtdSelected)
     }
     
     // MARK: - Lifecycle

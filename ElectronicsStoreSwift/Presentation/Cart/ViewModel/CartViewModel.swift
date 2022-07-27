@@ -9,8 +9,10 @@ import Foundation
 import RxRelay
 
 class CartViewModel {
-    // MARK: - Variables
+    // MARK: - Constants
     let userDefaults = UserDefaultsManagemen()
+    
+    // MARK: - Variables
     var cartData = BehaviorRelay<[CartModel]>(value: [])
     
     // MARK: - Init
@@ -21,4 +23,25 @@ class CartViewModel {
         let cartUD = userDefaults.getCart()
         cartData.accept(cartUD)
     }
+    
+    func getTotalValue() -> Float {
+        let totalArray = cartData.value.map { Float($0.qtd) * $0.product.price }
+        return totalArray.reduce(0) { $0 + $1 }
+    }
+    
+    func updateQtdCartItem(_ cartItem: CartModel) {
+        var carts = cartData.value
+        
+        let index = carts.firstIndex { $0.product.id == cartItem.product.id }
+
+        guard let findIndex = index else {
+            return
+        }
+
+        carts[findIndex].qtd = cartItem.qtd
+
+        userDefaults.setCart(carts)
+        self.cartData.accept(carts)
+    }
+    
 }

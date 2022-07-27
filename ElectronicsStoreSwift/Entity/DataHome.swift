@@ -22,7 +22,7 @@ struct Section: Codable {
 struct Product: Codable {
     let id: String
     let name: String
-    let price: Int
+    let price: Float
     let description: String
     let imagesName: [String]
     let isSaved: Bool

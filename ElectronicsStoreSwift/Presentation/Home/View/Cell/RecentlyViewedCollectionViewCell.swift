@@ -9,6 +9,10 @@ import UIKit
 import RxSwift
 import RxRelay
 
+protocol RecentlyViewedCollectionViewCellDelegate {
+    func navigationFromRecentlyToDetails(_ product: Product)
+}
+
 class RecentlyViewedCollectionViewCell: UICollectionViewCell {
     // MARK: - Constants
     static let resuseIdentifier: String = "RecentlyViewedCollectionViewCell"
@@ -16,6 +20,7 @@ class RecentlyViewedCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Variables
     fileprivate var cellData = BehaviorRelay<[Product]>(value: [])
+    var delegate: RecentlyViewedCollectionViewCellDelegate?
     
     // MARK: - Components
     fileprivate let stackBase: UIStackView = {
@@ -121,6 +126,9 @@ class RecentlyViewedCollectionViewCell: UICollectionViewCell {
 
 // MARK: - extension UICollectionViewDelegate
 extension RecentlyViewedCollectionViewCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.navigationFromRecentlyToDetails(cellData.value[indexPath.row])
+    }
 }
 
 // MARK: - extension CollectionViewDataSource

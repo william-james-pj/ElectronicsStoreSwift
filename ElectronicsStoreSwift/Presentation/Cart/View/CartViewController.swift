@@ -36,6 +36,7 @@ class CartViewController: UIViewController {
     
     fileprivate let emptyView: EmptyView = {
         let view = EmptyView()
+        view.title = "Your cart is empty"
         view.isHidden = true
         return view
     }()

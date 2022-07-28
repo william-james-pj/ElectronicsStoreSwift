@@ -6,33 +6,28 @@
 //
 
 import Foundation
-import RxSwift
-import RxRelay
 
 class DetailsProductViewModel {
     // MARK: - Constants
     let userDefaults = UserDefaultsManagemen()
-    let setViewedBehavior = BehaviorRelay<Int>(value: 0)
     
     // MARK: - Init
     public init() {
     }
     
     // MARK: - Variables
-    func setProductViewed(_ product: Product) {
-        var arrayAux = userDefaults.getProductViewed()
+    func setProductViewed(_ product: Product) -> Bool {
+        var viewed = userDefaults.getProductViewed()
         
-        let isViewed = arrayAux.first { item in
-            item.id == product.id
-        }
+        let isViewed = viewed.first { $0.id == product.id }
         
         if isViewed != nil {
-            return
+            return false
         }
         
-        arrayAux.insert(product, at: 0)
-        userDefaults.setProductViewed(arrayAux)
-        self.setViewedBehavior.accept(1)
+        viewed.insert(product, at: 0)
+        userDefaults.setProductViewed(viewed)
+        return true
     }
     
     func addProductInCart(_ product: Product, qtd: Int) {
@@ -40,5 +35,24 @@ class DetailsProductViewModel {
         var carts = userDefaults.getCart()
         carts.append(newCart)
         userDefaults.setCart(carts)
+    }
+    
+    func addSavedProduct(_ product: Product) -> Bool {
+        var saved = userDefaults.getSaved()
+        
+        let index = saved.firstIndex(where: { $0.id == product.id })
+        
+        if let index = index {
+            saved.remove(at: index)
+            userDefaults.setSaved(saved)
+            return false
+        }
+        
+        var aux = product
+        aux.isSaved = true
+        saved.append(aux)
+        
+        userDefaults.setSaved(saved)
+        return true
     }
 }

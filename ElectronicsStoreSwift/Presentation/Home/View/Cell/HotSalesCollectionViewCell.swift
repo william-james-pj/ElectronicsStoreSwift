@@ -126,7 +126,7 @@ class HotSalesCollectionViewCell: UICollectionViewCell {
 
 // MARK: - extension UICollectionViewDelegate
 extension HotSalesCollectionViewCell: UICollectionViewDelegate {
-    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.navigationToDetails(cellData.value[indexPath.row])
     }
 }

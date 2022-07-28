@@ -94,12 +94,8 @@ extension HomeViewController: UICollectionViewDelegate {
         }
         
         let detailsVC = DetailsProductViewController()
+        detailsVC.delegate = self
         detailsVC.settingScreen(baseData[2].products[indexPath.row])
-        
-        detailsVC.viewModel.setViewedBehavior.subscribe(onNext: { _ in
-            self.viewModel.updateProductViewed()
-        }).disposed(by: disposeBag)
-        
         self.navigationController?.pushViewController(detailsVC, animated: true)
     }
 }
@@ -148,6 +144,7 @@ extension HomeViewController: UICollectionViewDataSource {
         case 2: //Recently Viewed
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecentlyViewedCollectionViewCell.resuseIdentifier, for: indexPath) as! RecentlyViewedCollectionViewCell
             cell.settingCell(self.baseData[1].products)
+            cell.delegate = self
             return cell
             
         case 3: //Discover Header
@@ -203,13 +200,31 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 extension HomeViewController: HotHotSalesCollectionViewCellDelegate{
     func navigationToDetails(_ product: Product) {
         let detailsVC = DetailsProductViewController()
+        detailsVC.delegate = self
         detailsVC.settingScreen(product)
-        
-        detailsVC.viewModel.setViewedBehavior.subscribe(onNext: { _ in
-            self.viewModel.updateProductViewed()
-        }).disposed(by: disposeBag)
-        
         self.navigationController?.pushViewController(detailsVC, animated: true)
     }
 
+}
+
+// MARK: - extension RecentlyViewedCollectionViewCellDelegate
+extension HomeViewController: RecentlyViewedCollectionViewCellDelegate{
+    func navigationFromRecentlyToDetails(_ product: Product) {
+        let detailsVC = DetailsProductViewController()
+        detailsVC.delegate = self
+        detailsVC.settingScreen(product)
+        self.navigationController?.pushViewController(detailsVC, animated: true)
+    }
+
+}
+
+extension HomeViewController: DetailsProductViewControllerDelegate {
+    func productViewed() {
+        self.viewModel.updateProductViewed()
+    }
+    
+    func productIsSaved(_ id: String, isSaved: Bool) {
+        self.viewModel.updateProductSaved(id, isSaved: isSaved)
+    }
+    
 }

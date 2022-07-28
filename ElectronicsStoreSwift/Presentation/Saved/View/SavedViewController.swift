@@ -6,13 +6,20 @@
 //
 
 import UIKit
+import RxSwift
 
 class SavedViewController: UIViewController {
     // MARK: - Constrants
+    private let disposeBag = DisposeBag()
     private let reuseIdentifierHeader = "SavedHeader"
     private let reuseIdentifierFooter = "SavedFooter"
     
     // MARK: - Variables
+    fileprivate var viewModel: SavedViewModel = {
+        return SavedViewModel()
+    }()
+    fileprivate var savedData: [Product] = []
+    
     // MARK: - Components
     fileprivate let stackBase: UIStackView = {
         let stack = UIStackView()
@@ -27,6 +34,13 @@ class SavedViewController: UIViewController {
         let screenHeader = ScreenHeader()
         screenHeader.title = "Saved Items"
         return screenHeader
+    }()
+    
+    fileprivate let emptyView: EmptyView = {
+        let view = EmptyView()
+        view.title = "Your have no saved item"
+        view.isHidden = true
+        return view
     }()
         
     fileprivate let collectionViewSaved: UICollectionView = {
@@ -47,9 +61,21 @@ class SavedViewController: UIViewController {
         setupVC()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.viewModel.getData()
+    }
+    
     // MARK: - Setup
     fileprivate func setupVC() {
         view.backgroundColor = UIColor(named: "Backgroud")
+        
+        self.viewModel.savedData.subscribe(onNext: { data in
+            self.savedData = data
+            self.collectionViewSaved.reloadData()
+        }).disposed(by: disposeBag)
+        
+        setView()  
         buildHierarchy()
         buildConstraints()
         setupCollection()
@@ -66,10 +92,22 @@ class SavedViewController: UIViewController {
     }
 
     // MARK: - Methods
+    fileprivate func setView() {
+        if self.savedData.count == 0 {
+            self.collectionViewSaved.isHidden = true
+            self.emptyView.isHidden = false
+            return
+        }
+        self.collectionViewSaved.isHidden = false
+        self.emptyView.isHidden = true
+    }
+    
     fileprivate func buildHierarchy() {
         view.addSubview(stackBase)
         stackBase.addArrangedSubview(topBar)
         stackBase.addArrangedSubview(collectionViewSaved)
+        
+        stackBase.addArrangedSubview(emptyView)
     }
     
     fileprivate func buildConstraints() {
@@ -91,11 +129,12 @@ extension SavedViewController: UICollectionViewDelegate {
 // MARK: - extension CollectionViewDataSource
 extension SavedViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return self.savedData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SavedCollectionViewCell.resuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SavedCollectionViewCell.resuseIdentifier, for: indexPath) as! SavedCollectionViewCell
+        cell.settingCell(self.savedData[indexPath.row])
         return cell
     }
     

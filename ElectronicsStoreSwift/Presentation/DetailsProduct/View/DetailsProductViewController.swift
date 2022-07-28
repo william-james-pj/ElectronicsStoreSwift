@@ -6,14 +6,21 @@
 //
 
 import UIKit
+import RxSwift
+
+protocol DetailsProductViewControllerDelegate {
+    func productIsSaved(_ id: String, isSaved: Bool)
+    func productViewed()
+}
 
 class DetailsProductViewController: UIViewController {
     // MARK: - Constrants
     // MARK: - Variables
+    var delegate: DetailsProductViewControllerDelegate?
     var viewModel: DetailsProductViewModel = {
         return DetailsProductViewModel()
     }()
-    var productSelected: Product?
+    fileprivate var productSelected: Product?
     
     // MARK: - Components
     fileprivate let stackBase: UIStackView = {
@@ -76,6 +83,7 @@ class DetailsProductViewController: UIViewController {
         button.layer.borderColor = UIColor(red: 0.96, green: 0.97, blue: 0.97, alpha: 1.00).cgColor
         button.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
         button.tintColor = UIColor(named: "Disabled")
+        button.addTarget(self, action: #selector(buttonSavedTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -166,6 +174,22 @@ class DetailsProductViewController: UIViewController {
         viewModel.addProductInCart(productSelected, qtd: qtd)
         self.navigationController?.popViewController(animated: true)
     }
+    
+    @IBAction func buttonSavedTapped(sender: UIButton) {
+        guard let productSelected = productSelected else {
+            return
+        }
+        
+        let isSaved = self.viewModel.addSavedProduct(productSelected)
+        self.delegate?.productIsSaved(productSelected.id, isSaved: isSaved)
+        
+        if !productSelected.isSaved {
+            self.buttonSaved.tintColor = UIColor(named: "Primary")
+        }
+        else {
+            self.buttonSaved.tintColor = UIColor(named: "Disabled")
+        }
+    }
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -194,8 +218,15 @@ class DetailsProductViewController: UIViewController {
         self.viewChooseColor.setButtonColors(colors)
         self.carouselDetailsProduct.settingCell(item.imagesName)
         
-        self.viewModel.setProductViewed(item)
+        if self.viewModel.setProductViewed(item) {
+            self.delegate?.productViewed()
+        }
+        
         self.productSelected = item
+        
+        if item.isSaved {
+            self.buttonSaved.tintColor = UIColor(named: "Primary")
+        }
     }
     
     fileprivate func buildHierarchy() {

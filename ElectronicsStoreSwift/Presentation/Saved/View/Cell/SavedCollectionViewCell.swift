@@ -32,7 +32,6 @@ class SavedCollectionViewCell: UICollectionViewCell {
     
     fileprivate let imageViewItem: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "macbookProM1")
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -61,7 +60,7 @@ class SavedCollectionViewCell: UICollectionViewCell {
     
     fileprivate let labelName: UILabel = {
         let label = UILabel()
-        label.text = "Macbook Pro M1"
+        label.numberOfLines = 2
         label.font = .systemFont(ofSize: 14, weight: .bold)
         label.textColor = UIColor(named: "Text")
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -70,7 +69,6 @@ class SavedCollectionViewCell: UICollectionViewCell {
     
     fileprivate let labelValue: UILabel = {
         let label = UILabel()
-        label.text = "$160"
         label.font = .systemFont(ofSize: 16, weight: .bold)
         label.textColor = UIColor(named: "Text")
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -130,6 +128,12 @@ class SavedCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Methods
+    func settingCell(_ item: Product) {
+        self.labelName.text = item.name
+        self.labelValue.text = "$\(item.price)"
+        self.imageViewItem.image = UIImage(named: item.imagesName[0])
+    }
+    
     fileprivate func buildHierarchy() {
         self.addSubview(stackBase)
         stackBase.addArrangedSubview(viewImageContainer)

@@ -49,4 +49,24 @@ class UserDefaultsManagemen {
         }
     }
     
+    // MARK: - Saved
+    func getSaved() -> [Product]{
+        let userDefaults = UserDefaults.standard
+        do {
+            let arrayUserDefault = try userDefaults.getObject(forKey: "saved", castTo: [Product].self)
+
+            return arrayUserDefault
+        } catch {
+            return []
+        }
+    }
+    
+    func setSaved(_ carts: [Product]) {
+        let userDefaults = UserDefaults.standard
+        do {
+            try userDefaults.setObject(carts, forKey: "saved")
+        } catch {
+        }
+    }
+    
 }

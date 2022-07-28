@@ -132,7 +132,6 @@ class RecentlyViewedCellCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Methods
-    // MARK: - Methods
     func settingCell(_ item: Product) {
         self.labelItemName.text = item.name
         self.labelItemValue.text = "$\(item.price)"

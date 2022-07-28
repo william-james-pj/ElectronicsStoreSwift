@@ -8,6 +8,13 @@
 import UIKit
 
 class EmptyView: UIView {
+    // MARK: - Variables
+    var title: String = "" {
+        didSet {
+            self.labelCoupon.text = title
+        }
+    }
+    
     // MARK: - Components
     fileprivate let stackBase: UIStackView = {
         let stack = UIStackView()
@@ -20,7 +27,6 @@ class EmptyView: UIView {
     
     fileprivate let labelCoupon: UILabel = {
         let label = UILabel()
-        label.text = "Your cart is empty"
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 14, weight: .bold)
         label.textColor = UIColor(named: "Disabled")

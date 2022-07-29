@@ -73,6 +73,7 @@ class SavedViewController: UIViewController {
         self.viewModel.savedData.subscribe(onNext: { data in
             self.savedData = data
             self.collectionViewSaved.reloadData()
+            self.setView()
         }).disposed(by: disposeBag)
         
         setView()  

@@ -66,6 +66,14 @@ class HeaderCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    fileprivate let imageViewHeader: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "header")
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     // MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -85,8 +93,10 @@ class HeaderCollectionViewCell: UICollectionViewCell {
     // MARK: - Methods
     fileprivate func buildHierarchy() {
         self.addSubview(viewBase)
-        viewBase.addSubview(viewShadow)
         
+        self.addSubview(imageViewHeader)
+        
+        viewBase.addSubview(viewShadow)
         viewBase.addSubview(labelSale)
         viewBase.addSubview(labelUp)
         viewBase.addSubview(labelOff)
@@ -104,7 +114,11 @@ class HeaderCollectionViewCell: UICollectionViewCell {
             viewShadow.trailingAnchor.constraint(equalTo: viewBase.trailingAnchor),
             viewShadow.bottomAnchor.constraint(equalTo: viewBase.bottomAnchor),
             
-            labelSale.topAnchor.constraint(equalTo: viewBase.topAnchor, constant: 40),
+            imageViewHeader.widthAnchor.constraint(equalToConstant: 250),
+            imageViewHeader.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 30),
+            imageViewHeader.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
+            
+            labelSale.topAnchor.constraint(equalTo: viewBase.topAnchor, constant: 10),
             labelSale.leadingAnchor.constraint(equalTo: viewBase.leadingAnchor, constant: 24),
             
             labelUp.topAnchor.constraint(equalTo: labelSale.bottomAnchor, constant: 0),
